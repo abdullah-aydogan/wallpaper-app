@@ -3,9 +3,23 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/action_kategori"
-        android:icon="@drawable/kategori"
-        android:title="Kategoriler"
-        app:showAsAction="always" />
+        android:id="@+id/action_hayvanlar"
+        android:icon="@drawable/hayvanlar"
+        android:title="Hayvanlar"/>
+
+    <item
+        android:id="@+id/action_renkler"
+        android:icon="@drawable/renkler"
+        android:title="Renkler"/>
+
+    <item
+        android:id="@+id/action_siyah"
+        android:icon="@drawable/siyah"
+        android:title="Siyah"/>
+
+    <item
+        android:id="@+id/action_diger"
+        android:icon="@drawable/diger"
+        android:title="Diğer"/>
 
 </menu>

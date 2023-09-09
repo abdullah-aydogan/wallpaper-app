@@ -1,6 +1,7 @@
 package com.abdullah.duvarkagitlari;
 
 public class Model {
+
     String url;
 
     public Model() {

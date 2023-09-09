@@ -12,6 +12,7 @@ import com.squareup.picasso.Picasso;
 import java.io.IOException;
 
 public class ViewActivity extends AppCompatActivity {
+
     private ImageView imageView;
     private FloatingActionButton btn_set_lock, btn_set_home;
 
@@ -20,6 +21,11 @@ public class ViewActivity extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view);
+
+        init();
+    }
+
+    private void init() {
 
         btn_set_lock = findViewById(R.id.setLockWallpaper);
         btn_set_home = findViewById(R.id.setHomeWallpaper);
@@ -38,6 +44,7 @@ public class ViewActivity extends AppCompatActivity {
 
         Picasso.get().load(getIntent().getStringExtra("images")).into(imageView);
     }
+
     private void setLockBackground() {
 
         Bitmap bitmap = ((BitmapDrawable)imageView.getDrawable()).getBitmap();
@@ -53,7 +60,7 @@ public class ViewActivity extends AppCompatActivity {
 
         catch (IOException e) {
 
-            Toast.makeText(this, "Bir şeyler yanlış gitti. :(", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Bir şeyler yanlış gitti!", Toast.LENGTH_SHORT).show();
             e.printStackTrace();
         }
     }
@@ -73,15 +80,8 @@ public class ViewActivity extends AppCompatActivity {
 
         catch (IOException e) {
 
-            Toast.makeText(this, "Bir şeyler yanlış gitti. :(", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Bir şeyler yanlış gitti!", Toast.LENGTH_SHORT).show();
             e.printStackTrace();
         }
-    }
-
-    @Override
-    public boolean onSupportNavigateUp() {
-
-        onBackPressed();
-        return true;
     }
 }

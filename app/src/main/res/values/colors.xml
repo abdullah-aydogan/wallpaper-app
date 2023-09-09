@@ -2,9 +2,7 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
-    <color name="background">#FFFFFF</color>
-    <color name="toolbarColor">#3F51B5</color>
     <color name="statusColor">#303F9F</color>
-    <color name="textColor">#000000</color>
+    <color name="textColor">#181818</color>
     <color name="accentColor">#FF9800</color>
 </resources>

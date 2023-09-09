@@ -1,21 +1,17 @@
 package com.abdullah.duvarkagitlari;
 
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -30,11 +26,9 @@ public class MainActivity extends AppCompatActivity  {
     private DatabaseReference databaseReference;
     private List<Model> images;
     private RecyclerView recyclerView;
-    private Toolbar toolbar_main;
+    private BottomNavigationView bottomNavigation;
 
-    private int checkedItem = 3;
-    private String kategori = "Diğer";
-    private String[] kategoriler = new String[] {"Hayvanlar", "Renkler", "Siyah", "Diğer"};
+    private String kategori = "Hayvanlar";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,12 +51,45 @@ public class MainActivity extends AppCompatActivity  {
             alert.show();
         }
 
-        toolbar_main = findViewById(R.id.toolbar_main);
-        setSupportActionBar(toolbar_main);
+        init();
+    }
+
+    private void init() {
 
         recyclerView = findViewById(R.id.recyclerView);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new GridLayoutManager(this,2));
+
+        bottomNavigation = findViewById(R.id.bottomNavigation);
+
+        bottomNavigation.setOnNavigationItemSelectedListener(item -> {
+
+            if(item.getItemId() == R.id.action_hayvanlar) {
+
+                kategori = "Hayvanlar";
+                loadImages(kategori);
+            }
+
+            if(item.getItemId() == R.id.action_renkler) {
+
+                kategori = "Renkler";
+                loadImages(kategori);
+            }
+
+            if(item.getItemId() == R.id.action_siyah) {
+
+                kategori = "Siyah";
+                loadImages(kategori);
+            }
+
+            if(item.getItemId() == R.id.action_diger) {
+
+                kategori = "Diğer";
+                loadImages(kategori);
+            }
+
+            return true;
+        });
 
         loadImages(kategori);
     }
@@ -99,73 +126,9 @@ public class MainActivity extends AppCompatActivity  {
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
 
-                Toast.makeText(MainActivity.this, "HATA!", Toast.LENGTH_LONG).show();
+                Toast.makeText(MainActivity.this, "Bir hata oluştu!", Toast.LENGTH_LONG).show();
             }
         });
-    }
-
-    private void showAlertDialog() {
-
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-
-        builder.setTitle("Kategoriler");
-
-        builder.setSingleChoiceItems(kategoriler, checkedItem, (dialogInterface, i) -> {
-
-            switch (i) {
-
-                case 0:
-                    kategori = "Hayvanlar";
-                    loadImages(kategori);
-                    checkedItem = 0;
-                    break;
-
-                case 1:
-                    kategori = "Renkler";
-                    loadImages(kategori);
-                    checkedItem = 1;
-                    break;
-
-                case 2:
-                    kategori = "Siyah";
-                    loadImages(kategori);
-                    checkedItem = 2;
-                    break;
-
-                case 3:
-                    kategori = "Diğer";
-                    loadImages(kategori);
-                    checkedItem = 3;
-                    break;
-            }
-        });
-
-        builder.setPositiveButton("Tamam", (dialogInterface, i) -> dialogInterface.dismiss());
-
-        builder.create();
-        builder.show();
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-
-        MenuInflater menuInflater = getMenuInflater();
-        menuInflater.inflate(R.menu.nav_menu, menu);
-
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-
-        int id = item.getItemId();
-
-        if(id == R.id.action_kategori) {
-
-            showAlertDialog();
-        }
-
-        return true;
     }
 
     @Override

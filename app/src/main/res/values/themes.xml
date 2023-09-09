@@ -4,7 +4,6 @@
         <!-- Customize your light theme here. -->
         <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
         <item name="android:statusBarColor">@color/statusColor</item>
-        <item name="android:actionMenuTextColor">@color/white</item>
     </style>
 
     <style name="Theme.DuvarKağıtları" parent="Base.Theme.DuvarKağıtları" />
