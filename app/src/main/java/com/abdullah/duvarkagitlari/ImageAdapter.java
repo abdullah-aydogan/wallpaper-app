@@ -38,7 +38,8 @@ public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ImageViewHol
 
         Model image = mImages.get(position);
 
-        Picasso.get().load(image.getUrl()).into(holder.imageView);
+        Picasso.get().load(image.getUrl())
+                .placeholder(R.drawable.yuklenme).error(R.drawable.hata).into(holder.imageView);
     }
 
     @Override
